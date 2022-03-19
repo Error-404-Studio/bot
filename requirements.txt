@@ -1,2 +1,3 @@
 diskord @ git+https://github.com/diskord-dev/diskord@dc31f78f77f1da9620dd77a4d60e96ab4211d8a3
 python-dotenv==0.19.2
+requests==2.26.0
