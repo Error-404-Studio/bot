@@ -4,10 +4,13 @@ import os
 from itertools import cycle
 from asyncio import sleep
 from dotenv import load_dotenv
+import sys
 
 client = commands.Bot(
     command_prefix="!",
-    intents=diskord.Intents(guilds=True, messages=True)
+    intents=diskord.Intents(guilds=True, messages=True),
+    case_insensitive=True,
+    help_command=None
 )
 
 async def change_status():
@@ -28,11 +31,15 @@ async def on_ready():
     print(f"{client.user} is online")
     client.loop.create_task(change_status())
 
-client.remove_command("help")
+
 
 for file in os.listdir("cogs"):
     if file.endswith(".py"):
-        client.load_extension(f"cogs.{file[:-3]}")
+        try:
+            client.load_extension(f"cogs.{file[:-3]}")
+        except Exception as e:
+            print("Error loading "+file)
+            print(e,file=sys.stderr)
 
 load_dotenv()
 
