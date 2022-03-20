@@ -10,7 +10,7 @@ class Moderation(commands.Cog):
         self.client = client
         self.timeReg = re.compile("^(?P<numbers>\d*)(?P<letters>\w*)$")
 
-    def checkIfEditable(self, member:diskord.Member, caller:diskord.Member, action: str) -> typing.Optional[str]:
+    def checkIfEditable(self, member: diskord.Member, caller: diskord.Member, action: str) -> typing.Optional[str]:
         if member == caller:
             return f"{fail} You can't "+action+" yourself!"
             
@@ -19,7 +19,7 @@ class Moderation(commands.Cog):
                            
             
         if member.id == self.client.user.id:
-            return f"{fail} I can't "+action+" myself!"
+            return f"{fail} I can't " + action + " myself!"
             
         if caller.guild.me.top_role <= member.top_role:
             return f"{fail} The user has a higher role or the same top role as mine.\nPlease move my role higher!"
@@ -70,7 +70,8 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: commands.MemberConverter, *, reason: str = None):
-        check = checkIfEditable(member,ctx.author,"kick")
+        check = checkIfEditable(member, ctx.author, "kick")
+        
         if check:
             await ctx.message.delete()
             return await ctx.send(check,delete_after=3)
@@ -94,7 +95,8 @@ class Moderation(commands.Cog):
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member: commands.MemberConverter, *, reason: str = None):
-        check = checkIfEditable(member,ctx.author,"ban")
+        check = checkIfEditable(member, ctx.author, "ban")
+        
         if check:
             return await ctx.send(check,delete_after=3)
 
