@@ -27,8 +27,18 @@ class Utilities(commands.Cog):
         )
 
         await ctx.send(embed=embed)
+        
+    @commands.command(aliases=["sourcecode"])
+    async def code(self, ctx):
+        embed = diskord.Embed(
+            title="Source code",
+            description="You can view the source code of the bot [here](https://github.com/Error-404-Studio/bot).",
+            color=0x538AEE
+        )
 
-    @commands.command()
+        await ctx.send(embed=embed)
+
+    @commands.command(aliases=["helpcode"])
     async def codehelp(self, ctx):
         embed = diskord.Embed(
             title="How to ask for help",
