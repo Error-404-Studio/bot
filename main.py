@@ -31,15 +31,13 @@ async def on_ready():
     print(f"{client.user} is online")
     client.loop.create_task(change_status())
 
-
-
 for file in os.listdir("cogs"):
     if file.endswith(".py"):
         try:
             client.load_extension(f"cogs.{file[:-3]}")
         except Exception as e:
-            print("Error loading "+file)
-            print(e,file=sys.stderr)
+            print("Error loading " + file)
+            print(e, file=sys.stderr)
 
 load_dotenv()
 
