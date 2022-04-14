@@ -1,14 +1,14 @@
-import diskord
-from diskord.ext import commands
+from discord import *
+from discord.ext.commands import *
 import asyncio
 
-class Utilities(commands.Cog):
+class Utilities(Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
+    @command()
     async def github(self, ctx):
-        embed = diskord.Embed(
+        embed = Embed(
             title="GitHub",
             description="You can check our organization on GitHub clicking [here](https://github.com/Error-404-Studio).",
             color=0x538AEE
@@ -16,9 +16,9 @@ class Utilities(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(aliases=["devs"])
+    @command(aliases=["devs"])
     async def developers(self, ctx):
-        embed = diskord.Embed(
+        embed = Embed(
             title="Our developers",
             description="""
             - <@825292137338765333> (AKA the founder of **Error 404 Studio**)
@@ -28,9 +28,9 @@ class Utilities(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @command()
     async def codehelp(self, ctx):
-        embed = diskord.Embed(
+        embed = Embed(
             title="How to ask for help",
             description="If you need help with your code, please check the guidelines at <#918170064560209940>. Also "
                         "remember to ask in the correct channel (if your programming language is not in the list, "
@@ -40,7 +40,7 @@ class Utilities(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @command()
     async def report(self, ctx):
         questions = [
             "Which user would you like to report? (Enter his/her ID or his/her username, don't mention him/her)",
@@ -65,7 +65,7 @@ class Utilities(commands.Cog):
 
         channel = await self.client.fetch_channel(918449539403382864)
 
-        embed = diskord.Embed(
+        embed = Embed(
             title=f"New user reported",
             description=f"""
             **Reporter:** {ctx.author.mention} (`{ctx.author}` | `{ctx.author.id}`)

@@ -1,19 +1,19 @@
-import diskord
-from diskord.ext import commands
-import requests
+from discord import *
+from discord.ext.commands import *
+from requests import *
 
-class Fun(commands.Cog):
+class Fun(Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
-    async def meme(self, ctx, *, subreddit = None):
+    @command()
+    async def meme(self, ctx, *, subreddit: str = None):
         if subreddit:
-            json=requests.get(
+            json = get(
                 f"https://meme-api.herokuapp.com/gimme/{subreddit}"
             ).json()
         else:
-            json=requests.get(f"https://meme-api.herokuapp.com/gimme").json()
+            json = get(f"https://meme-api.herokuapp.com/gimme").json()
 
         try:
             if json["code"]:
@@ -23,12 +23,12 @@ class Fun(commands.Cog):
                 return
         except KeyError:
             if not json["nsfw"]:
-                title=(
+                title = (
                     json["title"][:253]+"..."
-                    if len(json["title"])>256
+                    if len(json["title"]) > 256
                     else json["title"]
                 )
-                meme_embed = diskord.Embed(
+                meme_embed = Embed(
                     title=title,
                     description=f"r/{json['subreddit']}",
                     color=0x538AEE,

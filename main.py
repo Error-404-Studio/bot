@@ -1,39 +1,23 @@
-import diskord
-from diskord.ext import commands
-import os
-from itertools import cycle
-from asyncio import sleep
-from dotenv import load_dotenv
+from discord import Intents, Game
+from discord.ext.commands import *
+from os import *
+from dotenv import *
 
-client = commands.Bot(
+bot = Bot(
     command_prefix="!",
-    intents=diskord.Intents(guilds=True, messages=True)
+    intents=Intents(guilds=True, members=True, messages=True, message_content=True),
+    activity=Game(name="!help")
 )
+bot.remove_command("help")
 
-async def change_status():
-    statuses = cycle(
-        [
-            "!help",
-            "!devs | Check our developers!",
-            '!github | Check our organization!',
-        ]
-    )
-
-    while not client.is_closed():
-        await client.change_presence(activity=diskord.Game(name=next(statuses)))
-        await sleep(10)
-
-@client.event
+@bot.event
 async def on_ready():
-    print(f"{client.user} is online")
-    client.loop.create_task(change_status())
+    print(f"{bot.user} is online.")
 
-client.remove_command("help")
-
-for file in os.listdir("cogs"):
+for file in listdir("cogs"):
     if file.endswith(".py"):
-        client.load_extension(f"cogs.{file[:-3]}")
+        bot.load_extension(f"cogs.{file[:-3]}")
 
 load_dotenv()
 
-client.run(os.getenv("TOKEN"))
+bot.run(getenv("TOKEN"))
