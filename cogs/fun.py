@@ -5,7 +5,13 @@ from requests import *
 class Fun(Cog):
     def __init__(self, client):
         self.client = client
-
+    @command()
+    async def dog(self, ctx):
+        await ctx.send(get("https://dog.ceo/api/breeds/image/random").json()["message"],view=ui.View(ui.Button(ButtonStyle.primary,custom_id="cat_next",label="NEXT")))
+        
+    @command()
+    async def cat(self, ctx):
+        await ctx.send(get("https://api.thecatapi.com/v1/images/search").json()["url"],view=ui.View(ui.Button(ButtonStyle.primary,custom_id="dog_next",label="NEXT")))
     @command()
     async def meme(self, ctx, *, subreddit: str = None):
         if subreddit:
