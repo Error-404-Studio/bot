@@ -1,6 +1,7 @@
 from discord import *
 from discord.ext.commands import *
-from requests import get
+from requests import *
+
 class Events(Cog):
     def __init__(self, client):
         self.client = client
