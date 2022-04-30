@@ -10,7 +10,7 @@ class Moderation(Cog):
         self.client = client
 
     @command()
-    @has_any_role("Helper", "Moderator")
+    @has_permissions(manage_channels=True)
     async def lock(self, ctx, channel: TextChannel = None):
         channel = ctx.channel or channel
 
@@ -37,7 +37,7 @@ class Moderation(Cog):
             await channel.send(embed=embed)
 
     @command()
-    @has_any_role("Helper", "Moderator", "Owner")
+    @has_permissions(manage_channels=True)
     async def unlock(self, ctx, channel: TextChannel = None):
         channel = ctx.channel or channel
 
@@ -188,7 +188,7 @@ class Moderation(Cog):
             return False
 
     @command()
-    @has_any_role("Helper", "Moderator", "Owner")
+    @has_guild_permissions(manage_messages=True)
     async def mute(self, ctx, member: MemberConverter, *, reason: str = None):
         muted_role = utils.get(ctx.guild.roles[::-1], name="Muted")
 
@@ -219,6 +219,7 @@ class Moderation(Cog):
             await member.send(embed=embeddm)
 
     @command()
+    @has_guild_permissions(manage_messages=True)
     async def unmute(self, ctx, member: MemberConverter):
         muted_role = utils.get(ctx.guild.roles[::-1], name="Muted")
 
@@ -261,7 +262,7 @@ class Moderation(Cog):
         await member.send(embed=embeddm)
 
     @command()
-    @has_any_role("Helper", "Moderator", "Owner")
+    @has_permissions(manage_messages=True)
     async def clear(self, ctx, amount: int):
         if amount > 100:
             await ctx.message.delete()
@@ -275,7 +276,7 @@ class Moderation(Cog):
                 await ctx.send(f"{fail} Due to Discord's ToS, you can't delete messages that are more than 14 days old.")
 
     @command()
-    @has_any_role("Helper", "Moderator", "Owner")
+    @has_permissions(manage_channels=True)
     async def slowmode(self, ctx, seconds: int):
         if seconds > 21600:
             await ctx.message.delete()

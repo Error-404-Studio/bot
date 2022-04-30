@@ -4,11 +4,12 @@ from os import *
 from dotenv import *
 
 bot = Bot(
-    command_prefix="!",
+    command_prefix=when_mentioned_or("!"),
     intents=Intents(guilds=True, members=True, messages=True, message_content=True),
-    activity=Game(name="!help")
+    activity=Game(name="!help"),
+    help_command=None,
+    case_insensitive=True
 )
-bot.remove_command("help")
 
 @bot.event
 async def on_ready():
