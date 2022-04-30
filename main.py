@@ -10,7 +10,6 @@ bot = Bot(
     help_command=None,
     case_insensitive=True
 )
-bot.remove_command("help")
 
 @bot.event
 async def on_ready():
