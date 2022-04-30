@@ -41,6 +41,16 @@ class Utilities(Cog):
         await ctx.send(embed=embed)
 
     @command()
+    async def code(self, ctx):
+        embed = Embed(
+            title="Source code",
+            description="You can view the source code of the bot [here](https://github.com/Error-404-Studio/bot).",
+            color=0x538AEE
+        )
+
+        await ctx.send(embed=embed)
+
+    @command()
     async def report(self, ctx):
         questions = [
             "Which user would you like to report? (Enter his/her ID or his/her username, don't mention him/her)",

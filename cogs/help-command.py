@@ -32,6 +32,8 @@ Press the <:fun_button:918478578054725632> button to view the fun commands.
 
 `!codehelp`: Check how to ask for help.
 
+`!code`: Check the bot's source code.
+
 `!report`: Report a member to the staff.
 
 Press the <:home_button:918467896592719902> button to return to the home.
@@ -78,6 +80,8 @@ Press the <:fun_button:918478578054725632> button to view the fun commands.
         embed = Embed(
             title="Fun",
             description="""
+`!dog`: Get a random dog picture.            
+            
 `!meme [subreddit]`: Get a meme from Reddit (add a subreddit name if you want the meme from that subreddit).
 
 Press the <:home_button:918467896592719902> button to return to the home.
